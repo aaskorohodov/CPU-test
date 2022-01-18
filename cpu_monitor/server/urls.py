@@ -3,6 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('server/<slug:cpu>', cpu_server, name='cpu_server'),
+    path('', Result.as_view(), name='result'),
     path('results', Result.as_view(), name='result'),
     path('results_last_100', Last100Results.as_view(), name='last100'),
     path('results_last_100_min', Last100ResultsMin.as_view(), name='last100min'),

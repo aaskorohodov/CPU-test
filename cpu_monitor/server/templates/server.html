@@ -3,6 +3,7 @@
 {% block content %}
 
 
+<!--Аналог меню-->
 <div class="head">
 	{% for k, v in menu.items %}
 	<a href="{{v}}"><p>{{k}}</p></a>
@@ -12,6 +13,7 @@
 <hr>
 
 
+<!--Заголовки для колонок-->
 <ul class="list">
 	{% for i in gen %}
 		<li>
@@ -24,6 +26,7 @@
 </ul>
 
 
+<!--Сами данные-->
 <ul class="list">
 
 	{% for cpu in cpus %}
@@ -37,5 +40,8 @@
 
 </ul>
 
+<div class="head">
+	<p>Среднее значение загрузки для текущих данных (вся выборка): {{avg}}%</p>
+</div>
 
 {% endblock %}
