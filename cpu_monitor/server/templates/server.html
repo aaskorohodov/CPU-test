@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="head">
+	{% for k, v in menu.items %}
+	<a href="{{v}}"><p>{{k}}</p></a>
+	{% endfor %}
+</div>
+
+<hr>
+
+
+<ul class="list">
+	{% for i in gen %}
+		<li>
+			<div class="specs-container-main">
+				<div class="specs">Загрузка</div>
+				<div class="specs"> Время</div>
+			</div>
+		</li>
+	{% endfor %}
+</ul>
+
+
+<ul class="list">
+
+	{% for cpu in cpus %}
+	<li>
+		<div class="specs-container">
+			<div class="specs">{{cpu.number}}%</div>
+			<div class="specs"> ({{ cpu.time_create|date:"H:i:s" }})</div>
+		</div>
+	</li>
+	{% endfor %}
+
+</ul>
+
+
+{% endblock %}

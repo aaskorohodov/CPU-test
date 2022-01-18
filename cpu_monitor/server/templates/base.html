@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Результаты</title>
+	<link type="text/css" href="{% static 'server/css/styles.css' %}" rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+
+<!-- Блок контента -->
+{% block content %}
+{% endblock %}
+<!-- Конец блока контента -->
+
+
+<!-- Пагинация -->
+
+	<!-- Проверка, есть ли другие страницы. Если нет, пагинация не выводится -->
+	{% if page_obj.has_other_pages %}
+
+		<nav class="list-pages">
+		<ul>
+
+			<!-- Проверка, есть ли предыдущие страницы. Если есть, выводим кнопку < -->
+			{% if page_obj.has_previous %}
+				<li class="page-num">
+         		<a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+				</li>
+			{% endif %}
+
+			<!-- Цикл, перебирает все страницы пагинации -->
+			{% for p in paginator.page_range %}
+
+			<!-- Отключает ссылку на текущую страницу пагинации, чтобы не переходить сам на себя -->
+			{% if page_obj.number == p %}
+        		<li class="page-num page-num-selected">{{ p }}
+				</li>
+
+			<!-- Выводим на 2 страницы до и после текущей, используя фильтр add (прибавляем\вычитаем к текущей 2) -->
+			{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+        		<li class="page-num">
+            	<a href="?page={{ p }}">{{ p }}</a>
+        		</li>
+
+			{% endif %}
+			{% endfor %}
+
+			<!-- Проверяем, есть ли следующие страницы. Если есть, выводим кнопку > -->
+			{% if page_obj.has_next %}
+				<li class="page-num">
+				<a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+				</li>
+			{% endif %}
+
+		</ul>
+		</nav>
+	{% endif %}
+
+<!-- Конец пагинации -->
+
+</body>
+</html>
